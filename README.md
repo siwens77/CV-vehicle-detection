@@ -10,8 +10,8 @@ The notebooks are in `notebooks/`, one per iteration:
 
 - `iteration1_methods.ipynb`: data loading, signal statistics and comparison of the first methods (abs, gradient, median normalization, opening) with ROC curves.
 - `iteration2_search.ipynb`: search over every combination of steps (frequency filter → abs / grad → channel normalization → gamma + blur → percentile threshold → opening), leave-one-out check and plots of the best chains.
-- `iteration3_denoising_real.ipynb`: a cleaner mask for the real data (40-312 Hz band envelope → log ratio to channel median → row median removed → Gaussian blur → hysteresis threshold), checked on the hand-made reference in `annotations/real_reference.json` and on the whole recording.
-- `iteration4_detection.ipynb`: first draft of vehicle detection with an oriented line filter, speed and direction of every vehicle, and car / tram classification.
+- `iteration3_denoising_real.ipynb`: a cleaner mask for the real data (40-312 Hz band envelope → log ratio to channel median → row median removed → Gaussian blur → hysteresis threshold), checked on the hand-made reference in `annotations/real_reference.json` and on the whole recording. At the end it saves its score images to `images/` (not in git), which `iteration4_detection.ipynb` uses, so run it first.
+- `iteration4_detection.ipynb`: detection on the images from iteration 3: Hough transform + region growing find every vehicle with its speed and direction, then strength and length give its type (car, van, truck or tram).
 
 ## Data
 
