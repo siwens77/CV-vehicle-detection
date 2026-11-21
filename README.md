@@ -10,7 +10,7 @@ We use the synthetic data, which has the ground truth, to build and check our me
 
 ![Flowchart of the algorithm](docs/figures/flowchart.png)
 
-1. **Band-pass 40-312 Hz.** The FFT of every channel, frequencies outside the band are set to 0. In this band the vehicles stand out the most from the background.
+1. **Band-pass 40-312 Hz.** The FFT of every channel, frequencies outside the band are set to 0. In this band the vehicles are visible on the cleanest background.
 2. **Envelope.** |signal| averaged over 0.04 s, so the image gets 25 times smaller (3 000 rows instead of 75 000 for 2 minutes).
 3. **log(value / channel median).** Every place on the cable has its own noise level, after this step all channels are on the same scale.
 4. **Row median.** Subtracting the median of every row removes short bursts that hit all channels at the same moment (horizontal stripes). This gives the score image.
@@ -20,9 +20,9 @@ We use the synthetic data, which has the ground truth, to build and check our me
 
 ## Results
 
-**Frequency analysis.** Power spectrum of 1 s windows on the vehicles and in empty areas. Vehicles stand out most at 40-200 Hz (35-40 dB), while at 8-30 Hz the background is the strongest.
+**Frequency analysis.** The FFT of every channel, split into frequency bands (09:12:22, every image is one band). In the 40-100 Hz and 100-312 Hz bands almost all vehicles are visible on a clean background, the lower bands have much more noise and horizontal stripes.
 
-![Vehicle and background spectrum](docs/figures/spectrum.png)
+![Frequency bands](docs/figures/bands.png)
 
 **Denoising.** The best chain from the search on synthetic data (A) marks a third of the real image as vehicles, because its percentile threshold assumes there is always the same amount of traffic. Our chain (BEST) was chosen on a hand-made reference (60 points on vehicles and 9 empty areas): false alarms in the empty areas went down from 4.5% to 0.7%, 96-100% of the points are still hit and there is almost no small noise left.
 
